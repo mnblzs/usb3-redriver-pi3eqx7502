@@ -1,6 +1,6 @@
 # USB 3.0 ReDriver 中继板（PI3EQX7502）
 
-> 基于PI3EQX7502的USB 3.0 信号中继扩展板 —— 解决长线缆下 USB 3.0 链路训练失败、降级到 USB 2.0 的问题。
+> 基于 PI3EQX7502 的 USB 3.0 信号中继扩展板 —— 解决长线缆下 USB 3.0 链路训练失败、降级到 USB 2.0 的问题。
 
 ![状态](https://img.shields.io/badge/状态-已打样实测-brightgreen)
 
