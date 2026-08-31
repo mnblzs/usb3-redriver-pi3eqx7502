@@ -169,7 +169,7 @@ SW1:  [1]=ON  [2]=OFF [3]=OFF [4]=OFF [5]=OFF [6]=OFF [7]=ON  [8]=OFF
        0 dB            -3.5dB           6dB             3dB
 ```
 
-That is, **positions 1 and 7 ON, all others OFF**. This matches exactly what the author's 4-channel board derives (internal project, not open-sourced; uses fixed-resistor pinstraps, where designators marked `n'c'c` are not populated) — two independent paths arriving at the same answer.
+That is, **positions 1 and 7 ON, all others OFF**. This is exactly the configuration arrived at on the author's own 4-channel board (internal project, not open-sourced; it uses fixed-resistor pinstraps, where designators marked `n'c'c` are left unpopulated) — two independent routes to the same answer.
 
 > ✅ Measured: 30 cm A-male to A-male cable to the host + 3 m A-male to Micro-B cable to a RealSense D450, running stably at 5 Gbps.
 
@@ -236,7 +236,7 @@ U11 VBUS +5V ──┬──► C19 (10µF) ──► GND              input fil
                       └──► U3 pin 1 / pin 13 (Vdd33)
 ```
 
-- **Source**: 5 V from the host-side VBUS — no external supply needed. Note that this rail is shared with the peripheral; a USB 3.0 port is spec'd for 900 mA, so leave headroom for power-hungry peripherals.
+- **Source**: 5 V from the host-side VBUS — no external supply needed. Note that this rail is shared with the peripheral; a USB 3.0 port is specified for 900 mA, so leave headroom for power-hungry peripherals.
 - **C18 + R12 damping**: legacy LDO architectures like the AMS1117 require the output capacitor to have some ESR (0.1–10 Ω); an MLCC's ESR is too low and the regulator can oscillate. A small resistor (R12) in series with the 22 µF ceramic capacitor's ground path raises the ESR artificially — **1 Ω** here (FOJAN FRC0603F1R00TS).
 - **U3 has two Vdd33 pins (1 and 13)** — both need decoupling capacitors.
 
@@ -249,7 +249,7 @@ Power consumption (measured values from the datasheet):
 | Device Unplug | Output unterminated | 7.3 mW | — |
 | Standby | `EN_x#` = 1 | 0.15 mW | 1.8 mW |
 
-Active current is 125 mA max (99 mA typical). Adding roughly 168 mW of LDO loss gives about **496 mW** total on the 5 V side, drawing about **99 mA** from VBUS. SOT-89-3 thermal resistance is around 100–150 °C/W, so expect a 17–25 °C rise; in a sealed high-temperature enclosure, give U1 extra copper.
+Active current is 125 mA max (99 mA typical). Adding roughly 168 mW of LDO loss gives about **496 mW** total on the 5 V side, drawing about **99 mA** from VBUS. SOT-89-3 thermal resistance is around 100–150 °C/W, so expect a 17–25 °C rise; in a sealed high-temperature enclosure, add extra copper pour around U1.
 
 ---
 
@@ -413,7 +413,7 @@ Host ──[short cable, ideally < 0.5 m]──► U11 ──► ReDriver ──
 
 | Connector | Location | Connects to | Cable advice |
 | --- | --- | --- | --- |
-| **U11** | Edge-mount | Host | **As short as possible** — this run also attenuates, so keep what you can |
+| **U11** | Edge-mount | Host | **As short as possible** — this run attenuates the signal too, so cut it down as much as you can |
 | **USB5** | Vertical, on board | Peripheral | Your target length |
 
 No external power needed; it takes 5 V from the host-side VBUS.
@@ -479,7 +479,7 @@ Do not start with the long cable. Following this order localizes the problem qui
 
 5. **Tune as needed** (see section 9).
 
-> Only when step 2 reproduces the fallback and step 3 recovers it have you shown the board actually did something — that comparison is the sole criterion for judging whether this board is effective.
+> The board has only proven itself if step 2 reproduces the fallback and step 3 recovers it — that comparison is the sole criterion for judging whether this board is effective.
 
 ### The author's measurement
 
@@ -498,7 +498,7 @@ The numbers below come from one measurement session and represent **a single sam
 | Without the board, 3 m cable direct | ❌ Enumerates, but **falls back to USB 2.0 (480 Mbps)** |
 | With the board inserted | ✅ Runs properly at **USB 3.0 (5 Gbps)** |
 
-Same 3 m cable, and inserting the board takes it from 480M to 5000M — roughly a 10× bandwidth increase, which for a depth camera is the difference between hitting full resolution and frame rate or not.
+Same 3 m cable, and inserting the board takes it from 480M to 5000M — roughly a 10× bandwidth increase, which for a depth camera is the difference between reaching full resolution and frame rate, or falling short of both.
 
 **About the D450**: active IR stereo plus RGB, global shutter, depth up to 1280×720@30fps, FOV 86°×57°, 50 mm baseline, USB 3.1 interface. It streams stereo and RGB simultaneously, so it is demanding on both bandwidth and stability — a fairly "harsh" test subject. If it passes, ordinary peripherals should be no trouble.
 
@@ -562,15 +562,17 @@ Full text: <https://ohwr.org/project/cernohl/wikis/Documents/CERN-OHL-version-2>
 
 ## Appendix
 
-**Project structure** (EasyEDA Pro project `orin接口扩展`):
+**Project structure** (EasyEDA Pro project `orin接口扩展`, "Orin interface expansion"):
 
 ```
 ├── PI3EQX501i                          ← the board in this repository (schematic2_4 + PCB2_4)
 ├── orin接口扩展V0.7（4*PI3EQX7502）        ← internal project, not open-sourced
 ├── orin接口扩展V0.7.1（4*PI3EQX7502）_1    ← internal project, not open-sourced
 ├── Board1 / Board1_1 / Board2_1        ← internal project, not open-sourced
-└── 4层测试                              ← internal project, not open-sourced
+└── 4层测试 (4-layer test board)         ← internal project, not open-sourced
 ```
+
+Board names are left in their original Chinese because they are the actual names inside the EDA project — renaming them would make them impossible to find.
 
 > Except for `PI3EQX501i`, everything listed above is an internal project under the same top-level project and is **outside the scope of this repository**. They are listed only so that anyone receiving this repository's source files understands the overall project — design files for these boards cannot be provided, so please do not request them.
 
