@@ -12,13 +12,13 @@
 
 板子尺寸 43.59 × 57.42 mm，双层板。
 
-| 内容                              | 路径                                                                                             |
-| ------------------------------- | ---------------------------------------------------------------------------------------------- |
-| 原理图 PDF / 矢量 SVG                 | [`hardware/schematic.pdf`](hardware/schematic.pdf) · [`schematic.svg`](hardware/schematic.svg)  |
-| 物料清单（带立创编号，可直接下单）                | [`hardware/BOM.csv`](hardware/BOM.csv)                                                        |
-| Gerber 制板文件                     | [`hardware/gerber/Gerber_PCB2_4_2026-09-01.zip`](hardware/gerber/Gerber_PCB2_4_2026-09-01.zip) |
-| EasyEDA 工程源文件（.epro2）            | [`hardware/source/`](hardware/source)                                                          |
-| 3D 模型（STEP）                     | [`hardware/3d/`](hardware/3d)                                                                  |
+| 内容                    | 路径                                                                                             |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| 原理图 PDF / 矢量 SVG      | [`hardware/schematic.pdf`](hardware/schematic.pdf) · [`schematic.svg`](hardware/schematic.svg) |
+| 物料清单（带立创编号，可直接下单）     | [`hardware/BOM.csv`](hardware/BOM.csv)                                                         |
+| Gerber 制板文件           | [`hardware/gerber/Gerber_PCB2_4_2026-09-01.zip`](hardware/gerber/Gerber_PCB2_4_2026-09-01.zip) |
+| EasyEDA 工程源文件（.epro2） | [`hardware/source/`](hardware/source)                                                          |
+| 3D 模型（STEP）           | [`hardware/3d/`](hardware/3d)                                                                  |
 
 直接下载 Gerber 压缩包就能下单打板，不需要打开 EDA 软件。
 
@@ -293,7 +293,7 @@ D+ / D− 从 U11 直连到 USB5，**不经过 ReDriver**。原因：480 Mbps �
 | U1       | AMS1117-3.3S     | SOT-89-3           | 1  | C347256  | LDO 5V→3V3             |
 | SW1      | DSHP08TSGER      | SW-SMD 16P (P1.27) | 1  | C3293147 | 8 位拨码开关                |
 | RN1, RN2 | 4D03WGJ0472T5E   | RES-ARRAY 0603-8P  | 2  | C1980    | 4.7 kΩ × 4 排阻          |
-| R12      | FRC0603F1R00TS   | R0603              | 1  | C2907004 | 1 Ω 阻尼电阻                  |
+| R12      | FRC0603F1R00TS   | R0603              | 1  | C2907004 | 1 Ω 阻尼电阻               |
 | C1~C6    | CL05B104KO5NNNC  | C0402              | 6  | C1525    | 100 nF（4 AC 耦合 + 2 去耦） |
 | C18      | CL10A226MQ8NRNC  | C0603              | 1  | C59461   | 22 µF，LDO 输出           |
 | C19      | CL10A106KP8NNNC  | C0603              | 1  | C19702   | 10 µF，LDO 输入           |
