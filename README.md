@@ -10,10 +10,6 @@
 
 ![芯片](https://img.shields.io/badge/主芯片-PI3EQX7502AI-yellow)
 
-| PCB 顶层 | PCB 底层 | 3D 预览 |
-| :------: | :------: | :-----: |
-| ![PCB 顶层](images/pcb-top.png) | ![PCB 底层](images/pcb-bottom.png) | ![3D 预览](images/pcb-3d.png) |
-
 板子尺寸 43.59 × 57.42 mm，双层板。
 
 | 内容                              | 路径                                                                                             |
