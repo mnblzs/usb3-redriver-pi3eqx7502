@@ -516,7 +516,7 @@ What cable to use and how far you can push it depend on your peripheral and cabl
 
 ## 11. Replication Guide
 
-**What you need**: the PCB (2 layers, 43.6 × 57.4 mm), a hot air gun or hot plate, a soldering iron, a multimeter, and a magnifier.
+**What you need**: the PCB (2 layers, 43.59 × 57.42 mm), a hot air gun or hot plate, a soldering iron, a multimeter, and a magnifier.
 
 **Steps**:
 
