@@ -1,0 +1,12 @@
+# EasyEDA / 嘉立创 EDA 本地缓存
+.easyeda/
+
+# 编辑器与系统
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+~$*.docx
+
+# 导出中间产物
+*.zip.tmp

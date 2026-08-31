@@ -1,0 +1,8 @@
+# 行尾归一化：仓库内统一 LF，检出时按平台转换
+* text=auto
+
+# 二进制文件，禁止任何转换
+*.png binary
+*.pdf binary
+*.svg text
+*.csv text
