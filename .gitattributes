@@ -4,5 +4,9 @@
 # 二进制文件，禁止任何转换
 *.png binary
 *.pdf binary
+*.zip binary
+*.step binary
+*.stp binary
+*.epro2 binary
 *.svg text
 *.csv text

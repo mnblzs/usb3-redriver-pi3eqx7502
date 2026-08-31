@@ -10,11 +10,21 @@
 
 ![芯片](https://img.shields.io/badge/主芯片-PI3EQX7502AI-yellow)
 
-| PCB 顶层 | PCB 底层 |
-| :------: | :------: |
-| ![PCB 顶层](images/pcb-top.png) | ![PCB 底层](images/pcb-bottom.png) |
+| PCB 顶层 | PCB 底层 | 3D 预览 |
+| :------: | :------: | :-----: |
+| ![PCB 顶层](images/pcb-top.png) | ![PCB 底层](images/pcb-bottom.png) | ![3D 预览](images/pcb-3d.png) |
 
-板子尺寸 43.59 × 57.42 mm，双层板。完整原理图见 [`hardware/schematic.pdf`](hardware/schematic.pdf)（矢量版 [`schematic.svg`](hardware/schematic.svg)），物料清单见 [`hardware/BOM.csv`](hardware/BOM.csv)（已带立创编号，可直接下单）。
+板子尺寸 43.59 × 57.42 mm，双层板。
+
+| 内容                              | 路径                                                                                             |
+| ------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 原理图 PDF / 矢量 SVG                 | [`hardware/schematic.pdf`](hardware/schematic.pdf) · [`schematic.svg`](hardware/schematic.svg)  |
+| 物料清单（带立创编号，可直接下单）                | [`hardware/BOM.csv`](hardware/BOM.csv)                                                        |
+| Gerber 制板文件                     | [`hardware/gerber/Gerber_PCB2_4_2026-09-01.zip`](hardware/gerber/Gerber_PCB2_4_2026-09-01.zip) |
+| EasyEDA 工程源文件（.epro2）            | [`hardware/source/`](hardware/source)                                                          |
+| 3D 模型（STEP）                     | [`hardware/3d/`](hardware/3d)                                                                  |
+
+直接下载 Gerber 压缩包就能下单打板，不需要打开 EDA 软件。
 
 ## 目录
 
@@ -206,8 +216,7 @@ U11 VBUS +5V ──┬──► C19 (10µF) ──► GND              输入滤
 ```
 
 - **供电来源**：host 侧 VBUS 取 5 V，无需外接电源。注意这路和外设供电共用，USB 3.0 端口标准供电 900 mA，外设功耗大时要留余量。
-- **C18 + R12 阻尼**：AMS1117 这类老架构 LDO 对输出电容 ESR 有要求（0.1~10 Ω），MLCC 的 ESR 太低会振荡。所以在 22 µF 陶瓷电容接地路径串一颗小电阻（R12）人为抬高 ESR。
-  > ⚠️ **待确认**：BOM 里 R12 的 Value 写 `1Ω`，但立创编号 C22936（0603WAF100KT5E）按厚声命名应为 **10 Ω**。两个值都能起阻尼作用，但文档与实物应一致。
+- **C18 + R12 阻尼**：AMS1117 这类老架构 LDO 对输出电容 ESR 有要求（0.1~10 Ω），MLCC 的 ESR 太低会振荡。所以在 22 µF 陶瓷电容接地路径串一颗小电阻（R12）人为抬高 ESR，取值 **1 Ω**（富捷 FRC0603F1R00TS）。
 - **U3 有两组 Vdd33（pin 1 和 13）**，都要去耦到。
 
 功耗（数据手册实测值）：
@@ -288,7 +297,7 @@ D+ / D− 从 U11 直连到 USB5，**不经过 ReDriver**。原因：480 Mbps �
 | U1       | AMS1117-3.3S     | SOT-89-3           | 1  | C347256  | LDO 5V→3V3             |
 | SW1      | DSHP08TSGER      | SW-SMD 16P (P1.27) | 1  | C3293147 | 8 位拨码开关                |
 | RN1, RN2 | 4D03WGJ0472T5E   | RES-ARRAY 0603-8P  | 2  | C1980    | 4.7 kΩ × 4 排阻          |
-| R12      | 0603WAF100KT5E   | R0603              | 1  | C22936   | 阻尼电阻（⚠️ 阻值待核对）         |
+| R12      | FRC0603F1R00TS   | R0603              | 1  | C2907004 | 1 Ω 阻尼电阻                  |
 | C1~C6    | CL05B104KO5NNNC  | C0402              | 6  | C1525    | 100 nF（4 AC 耦合 + 2 去耦） |
 | C18      | CL10A226MQ8NRNC  | C0603              | 1  | C59461   | 22 µF，LDO 输出           |
 | C19      | CL10A106KP8NNNC  | C0603              | 1  | C19702   | 10 µF，LDO 输入           |
@@ -457,7 +466,6 @@ lsusb -t
 | E-1  | **PI3EQX7502AI 已 NRND**                    | 采购风险                      | 备货，或评估 PI3EQX7741AI   |
 | E-2  | EQ/DE 补偿没用在最需要的地方（`EQ_A`=3 dB、`DE_B`=0 dB） | **实测 3 m 稳定可用**，只是眼图裕量非最优 | 3 m 内不必动；想压更远时把这两项往上推 |
 | E-3' | 未引出 `EN_x#` 控制脚                            | 无法用 GPIO 强制低功耗            | 需要时把 pin 10/21 引到排针   |
-| E-4  | **BOM 中 R12 阻值不一致**（标 1 Ω，编号对应 10 Ω）       | 文档与实物不符                   | 核对实物后统一               |
 | E-5  | **未做 90 Ω 差分阻抗控制**                         | 板内阻抗偏高，短走线下影响有限           | 向板厂提阻抗要求，或改 4 层板      |
 | E-6  | 3V3 走线细长（101.6 mm / 10 mil）                | 压降和噪声裕量偏小                 | 改铺铜，或加宽到 15~20 mil    |
 | E-7  | `+5V` / `3V3` 未铺铜                          | 同上                        | 用铺铜替代细走线              |
@@ -508,7 +516,7 @@ lsusb -t
 **步骤**：
 
 1. 确认 U3 库存（NRND，先查 C526708）；
-2. 取 Gerber：`hardware/gerber/` 目录下为制板文件压缩包，直接用它下单；若目录为空，就在 EasyEDA 工程里用「导出 → Gerber」自行生成。按嘉立创默认工艺即可（追求信号质量就在制板说明加"USB 3.0 差分对按 90 Ω 阻抗控制"）；
+2. 取 Gerber：`hardware/gerber/` 下的压缩包直接用它下单。按嘉立创默认工艺即可（追求信号质量就在制板说明加"USB 3.0 差分对按 90 Ω 阻抗控制"）；
 3. 按第六节 BOM 备料 → 按第八节焊接 → 按第九节接线验证 → 按第十节做"直连 vs 串板"对比。
 
 **值得改的几处**（按性价比排序）：
