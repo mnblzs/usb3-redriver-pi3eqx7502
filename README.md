@@ -22,6 +22,24 @@
 | EasyEDA 工程源文件（.epro2） | [`hardware/source/`](hardware/source)                                                          |
 | 3D 模型（STEP）           | [`hardware/3d/`](hardware/3d)                                                                  |
 
+## 仓库结构
+
+```text
+usb3-redriver-pi3eqx7502/
+├── README.md · README_EN.md            # 中文 / English 说明
+├── LICENSE                             # CERN-OHL-S-2.0 许可正文
+├── docs/
+│   └── 初创开源广场描述.md               # 平台发布用简介
+└── hardware/
+    ├── BOM.csv                         # 物料清单（含立创编号，可直接下单）
+    ├── schematic.pdf · schematic.svg   # 原理图（位图 / 矢量）
+    ├── gerber/…zip                     # Gerber 制板文件
+    ├── 3d/…step                        # 3D 模型
+    └── source/…epro2                   # 嘉立创 EDA 工程源文件
+```
+
+> 本仓库沿用传统 BOM 格式（`hardware/BOM.csv`：位号 / 数量 / 封装 / 料号），与其他仓库由嘉立创 EDA 导出的 `component-list.csv` 格式不同，但都包含采购所需信息。
+
 ## 目录
 
 - [一、这个项目解决什么问题](#一这个项目解决什么问题)
@@ -583,3 +601,12 @@ lsusb -t
 ---
 
 *最后更新：2026-09-01*
+
+## 相关仓库
+
+同系列的其他硬件项目，结构、许可与整理方式保持一致：
+
+- [`gh125-cable-tester`](https://github.com/mnblzs/gh125-cable-tester) — GH125 系列线束通断与线序检测工装（TP4059 充电、GH125 连接器矩阵）
+- [`stm32f4-dev-board`](https://github.com/mnblzs/stm32f4-dev-board) — 2025 赛季步兵机器人 STM32F407 开发板（ME3121 / AMS1117 供电、SN65HVD232D CAN）
+- [`mt6835-magnetic-encoder`](https://github.com/mnblzs/mt6835-magnetic-encoder) — RM25 工程机器人 MT6835 磁编码器模块（STM32F103 采集、CAN 输出）
+- [`solar-car-hardware`](https://github.com/mnblzs/solar-car-hardware) — 2024 工训太阳能小车三板方案（CN3305 充电 / 超级电容储能 / TPS63070 + DRV8837 控制板）
