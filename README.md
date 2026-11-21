@@ -29,7 +29,7 @@ usb3-redriver-pi3eqx7502/
 ├── README.md · README_EN.md            # 中文 / English 说明
 ├── LICENSE                             # CERN-OHL-S-2.0 许可正文
 ├── docs/
-│   └── 初创开源广场描述.md               # 平台发布用简介
+│   └── 立创开源广场描述.md               # 平台发布用简介
 └── hardware/
     ├── BOM.csv                         # 物料清单（含立创编号，可直接下单）
     ├── schematic.pdf · schematic.svg   # 原理图（位图 / 矢量）
